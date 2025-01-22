@@ -1,5 +1,6 @@
 import 'package:habito_2/data/datasource/i_habito_datasource.dart';
 import 'package:habito_2/domain/entities/habito/habito.dart';
+import 'package:uuid/uuid.dart';
 // 2. Data Source Concreta (Supabase Implementation)
 // -----------------------------------------------------------------------------
 
@@ -13,8 +14,8 @@ class HabitoRepository {
   HabitoRepository(this._dataSource);
 
   Future<Habito> createHabito(Habito habito) async {
-    // Pode adicionar lógica de negócios aqui antes de chamar a fonte de dados
-    return await _dataSource.createHabito(habito);
+    final newHabito = habito.copyWith(id: Uuid().v4());
+    return await _dataSource.createHabito(newHabito);
   }
 
   Future<List<Habito>> getAllHabitos() async {

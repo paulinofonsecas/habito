@@ -41,7 +41,7 @@ class DashboardPage extends StatelessWidget {
           body: DashboardView(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              CreateHabitoPage.route();
+              Navigator.of(context).push(CreateHabitoPage.route());
             },
             tooltip: 'Adicionar Hábito',
             elevation: 0,

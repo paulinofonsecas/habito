@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Firebase Firestore
 import 'package:habito_2/data/datasource/i_habito_datasource.dart';
 import 'package:habito_2/data/datasource/firebase_habito_datasource.dart';
+import 'package:habito_2/data/datasource/sqflite_datasource.dart';
 import 'package:habito_2/data/repository/habito_repository.dart';
 import 'package:habito_2/domain/usecases/habito_usecases.dart';
 
@@ -15,7 +16,7 @@ Future<void> setupServiceLocator() async {
   // ------------------------- Data Sources -------------------------
   // Register FirebaseHabitoDataSource as a singleton and bind it to HabitoDataSource interface
   sl.registerLazySingleton<HabitoDataSource>(
-    () => FirebaseHabitoDataSource(sl<FirebaseFirestore>()),
+    () => SqliteHabitoDataSource(),
   );
 
   // ------------------------- Repositories -------------------------
