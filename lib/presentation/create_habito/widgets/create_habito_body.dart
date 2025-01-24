@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:habito_2/presentation/create_habito/create_habito.dart';
 import 'package:habito_2/presentation/create_habito/provider/provider.dart';
-import 'package:habito_2/presentation/create_habito/widgets/affirmation_dropdown.dart';
+
+import 'conclusoes_diarias_widget.dart';
+import 'frequencia_widget.dart';
 
 /// {@template create_habito_body}
 /// Body of the CreateHabitoPage.
@@ -23,7 +25,7 @@ class _CreateHabitoBodyState extends State<CreateHabitoBody> {
   @override
   void dispose() {
     createHabitoNotifier.nameController.dispose();
-    createHabitoNotifier.goalController.dispose();
+    createHabitoNotifier.descricaoController.dispose();
     super.dispose();
   }
 
@@ -38,42 +40,35 @@ class _CreateHabitoBodyState extends State<CreateHabitoBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Habit name', style: Theme.of(context).textTheme.bodyMedium!),
             TextFormField(
               controller: createHabitoNotifier.nameController,
               decoration: const InputDecoration(
-                hintText: 'Eat clean',
+                labelText: 'Nome',
+                hintText: 'Ler 10 paginas',
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter a habit name';
+                  return 'O nome do hábito não pode ser vazio.';
                 }
                 return null;
               },
             ),
-            GutterLarge(),
-            AffirmationDropdown(
-              affirmation: createHabitoNotifier.selectedAffirmation,
-              onChanged: (newAffirmation) {
-                setState(() {
-                  createHabitoNotifier.selectedAffirmation = newAffirmation;
-                });
-              },
-            ),
             Gutter(),
             TextFormField(
-              controller: createHabitoNotifier.goalController,
+              controller: createHabitoNotifier.descricaoController,
               decoration: const InputDecoration(
-                hintText: 'loose 6kg by december',
+                labelText: 'Descrição',
+                hintText: 'Ler 10 ou mais paginas ante de dormir',
               ),
               maxLines: 1,
             ),
             GutterLarge(),
-            Text('Regularity', style: Theme.of(context).textTheme.bodyMedium!),
-            Gutter(),
-            regularityWidget(context),
-            Gutter(),
-            dailyRecurrence(context),
+            Row(
+              children: [
+                Expanded(child: ConclusoesDiariasWidget()),
+                Expanded(child: FrequenciaWidget()),
+              ],
+            ),
             GutterLarge(),
             Text('Icon', style: Theme.of(context).textTheme.bodyMedium!),
             Gutter(),
@@ -167,111 +162,7 @@ class _CreateHabitoBodyState extends State<CreateHabitoBody> {
     );
   }
 
-  Row dailyRecurrence(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Daily recurrence',
-                style: Theme.of(context).textTheme.bodyMedium!),
-            const SizedBox(height: 4),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('${createHabitoNotifier.dailyRecurrence2} / day'),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (createHabitoNotifier.dailyRecurrence2 > 1) {
-                        createHabitoNotifier.dailyRecurrence2--;
-                      }
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    minimumSize: const Size(24, 24), // Reduced button size
-                  ),
-                  child: const Icon(Icons.remove, size: 16),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      createHabitoNotifier.dailyRecurrence2++;
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    minimumSize: const Size(24, 24), // Reduced button size
-                  ),
-                  child: const Icon(Icons.add, size: 16),
-                ),
-              ],
-            ),
-          ],
-        ),
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('Reminder', style: Theme.of(context).textTheme.bodyMedium!),
-          const SizedBox(height: 4),
-          TextButton(
-            onPressed: () {
-              // TODO: Implement reminder action
-              print('Reminder button pressed');
-            },
-            child: const Row(
-              children: [
-                Text('none'),
-                Icon(Icons.close, size: 16),
-              ],
-            ),
-          ),
-        ]),
-      ],
-    );
-  }
-
-  SingleChildScrollView regularityWidget(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        spacing: 8,
-        children: createHabitoNotifier.daysOfWeek.map((day) {
-          return TextButton(
-              onPressed: () {
-                setState(() {
-                  if (createHabitoNotifier.selectedDays.contains(day)) {
-                    createHabitoNotifier.selectedDays.remove(day);
-                  } else {
-                    createHabitoNotifier.selectedDays.add(day);
-                  }
-                });
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: createHabitoNotifier.selectedDays.contains(day)
-                    ? Theme.of(context).primaryColor
-                    : null, // Highlight when selected, else default color,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        8)), // Rounded borders for the days buttons
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 4,
-                  vertical: 4,
-                ),
-                child: Text(
-                  day,
-                  style: TextStyle(
-                    color: createHabitoNotifier.selectedDays.contains(day)
-                        ? Colors.white
-                        : Theme.of(context).primaryColor,
-                  ),
-                ),
-              ));
-        }).toList(),
-      ),
-    );
+  Widget dailyRecurrence(BuildContext context) {
+    return ConclusoesDiariasWidget();
   }
 }

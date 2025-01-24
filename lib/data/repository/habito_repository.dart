@@ -1,6 +1,5 @@
 import 'package:habito_2/data/datasource/i_habito_datasource.dart';
 import 'package:habito_2/domain/entities/habito/habito.dart';
-import 'package:uuid/uuid.dart';
 // 2. Data Source Concreta (Supabase Implementation)
 // -----------------------------------------------------------------------------
 
@@ -17,8 +16,23 @@ class HabitoRepository {
     return await _dataSource.createHabito(habito);
   }
 
-  Future<List<Habito>> getAllHabitos() async {
-    return await _dataSource.getAllHabitos();
+  Future<List<Habito>> getAllHabitos(DateTime? date) async {
+    final habitos = await _dataSource.getAllHabitos();
+
+    // if (date != null) {
+    //   return habitos
+    //       .where(
+    //         (habito) => habito.completedDates.any(
+    //           (completedDate) =>
+    //               completedDate.year == date.year &&
+    //               completedDate.month == date.month &&
+    //               completedDate.day == date.day,
+    //         ),
+    //       )
+    //       .toList();
+    // } else {
+    // }
+      return habitos;
   }
 
   Future<List<Habito>> getConcluidos() async {

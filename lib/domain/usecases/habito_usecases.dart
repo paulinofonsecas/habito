@@ -45,9 +45,20 @@ class ObterListaHabitosUseCase {
 
   ObterListaHabitosUseCase(this._habitoRepository);
 
-  Future<List<Habito>> executar(/* Filtros e Ordenação Opcionais */) async {
-    return await _habitoRepository
-        .getAllHabitos(); // Usar o repositório para buscar
+  Future<List<Habito>> executar([DateTime? date]) async {
+    // if today, return only today's habits
+    final now = DateTime.now();
+
+    date ??= now;
+
+    if (date.year == now.year &&
+        date.month == now.month &&
+        date.day == now.day) {
+      return await _habitoRepository.getAllHabitos(null);
+    } else {
+      return await _habitoRepository
+          .getAllHabitos(date); // Usar o repositório para buscar
+    }
   }
 }
 

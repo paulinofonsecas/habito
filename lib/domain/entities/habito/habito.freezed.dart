@@ -23,8 +23,7 @@ mixin _$Habito {
   String get uuid => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
   String get nome => throw _privateConstructorUsedError;
-  @JsonKey(toJson: _$AffirmationToJson)
-  Affirmation get affirmation => throw _privateConstructorUsedError;
+  String? get descricao => throw _privateConstructorUsedError;
   @JsonKey(name: 'regularity_days')
   List<String> get regularityDays => throw _privateConstructorUsedError;
   @JsonKey(name: 'daily_recurrence')
@@ -61,7 +60,7 @@ abstract class $HabitoCopyWith<$Res> {
       {String uuid,
       int? id,
       String nome,
-      @JsonKey(toJson: _$AffirmationToJson) Affirmation affirmation,
+      String? descricao,
       @JsonKey(name: 'regularity_days') List<String> regularityDays,
       @JsonKey(name: 'daily_recurrence') int dailyRecurrence,
       List<String> reminders,
@@ -75,8 +74,6 @@ abstract class $HabitoCopyWith<$Res> {
       @JsonKey(name: 'last_completed_at') DateTime? lastCompletedAt,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
-
-  $AffirmationCopyWith<$Res> get affirmation;
 }
 
 /// @nodoc
@@ -97,7 +94,7 @@ class _$HabitoCopyWithImpl<$Res, $Val extends Habito>
     Object? uuid = null,
     Object? id = freezed,
     Object? nome = null,
-    Object? affirmation = null,
+    Object? descricao = freezed,
     Object? regularityDays = null,
     Object? dailyRecurrence = null,
     Object? reminders = null,
@@ -121,10 +118,10 @@ class _$HabitoCopyWithImpl<$Res, $Val extends Habito>
           ? _value.nome
           : nome // ignore: cast_nullable_to_non_nullable
               as String,
-      affirmation: null == affirmation
-          ? _value.affirmation
-          : affirmation // ignore: cast_nullable_to_non_nullable
-              as Affirmation,
+      descricao: freezed == descricao
+          ? _value.descricao
+          : descricao // ignore: cast_nullable_to_non_nullable
+              as String?,
       regularityDays: null == regularityDays
           ? _value.regularityDays
           : regularityDays // ignore: cast_nullable_to_non_nullable
@@ -163,16 +160,6 @@ class _$HabitoCopyWithImpl<$Res, $Val extends Habito>
               as DateTime?,
     ) as $Val);
   }
-
-  /// Create a copy of Habito
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $AffirmationCopyWith<$Res> get affirmation {
-    return $AffirmationCopyWith<$Res>(_value.affirmation, (value) {
-      return _then(_value.copyWith(affirmation: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -186,7 +173,7 @@ abstract class _$$HabitoImplCopyWith<$Res> implements $HabitoCopyWith<$Res> {
       {String uuid,
       int? id,
       String nome,
-      @JsonKey(toJson: _$AffirmationToJson) Affirmation affirmation,
+      String? descricao,
       @JsonKey(name: 'regularity_days') List<String> regularityDays,
       @JsonKey(name: 'daily_recurrence') int dailyRecurrence,
       List<String> reminders,
@@ -200,9 +187,6 @@ abstract class _$$HabitoImplCopyWith<$Res> implements $HabitoCopyWith<$Res> {
       @JsonKey(name: 'last_completed_at') DateTime? lastCompletedAt,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
-
-  @override
-  $AffirmationCopyWith<$Res> get affirmation;
 }
 
 /// @nodoc
@@ -221,7 +205,7 @@ class __$$HabitoImplCopyWithImpl<$Res>
     Object? uuid = null,
     Object? id = freezed,
     Object? nome = null,
-    Object? affirmation = null,
+    Object? descricao = freezed,
     Object? regularityDays = null,
     Object? dailyRecurrence = null,
     Object? reminders = null,
@@ -245,10 +229,10 @@ class __$$HabitoImplCopyWithImpl<$Res>
           ? _value.nome
           : nome // ignore: cast_nullable_to_non_nullable
               as String,
-      affirmation: null == affirmation
-          ? _value.affirmation
-          : affirmation // ignore: cast_nullable_to_non_nullable
-              as Affirmation,
+      descricao: freezed == descricao
+          ? _value.descricao
+          : descricao // ignore: cast_nullable_to_non_nullable
+              as String?,
       regularityDays: null == regularityDays
           ? _value._regularityDays
           : regularityDays // ignore: cast_nullable_to_non_nullable
@@ -296,7 +280,7 @@ class _$HabitoImpl implements _Habito {
       {required this.uuid,
       this.id,
       required this.nome,
-      @JsonKey(toJson: _$AffirmationToJson) required this.affirmation,
+      this.descricao,
       @JsonKey(name: 'regularity_days')
       final List<String> regularityDays = const [],
       @JsonKey(name: 'daily_recurrence') this.dailyRecurrence = 1,
@@ -326,8 +310,7 @@ class _$HabitoImpl implements _Habito {
   @override
   final String nome;
   @override
-  @JsonKey(toJson: _$AffirmationToJson)
-  final Affirmation affirmation;
+  final String? descricao;
   final List<String> _regularityDays;
   @override
   @JsonKey(name: 'regularity_days')
@@ -376,7 +359,7 @@ class _$HabitoImpl implements _Habito {
 
   @override
   String toString() {
-    return 'Habito(uuid: $uuid, id: $id, nome: $nome, affirmation: $affirmation, regularityDays: $regularityDays, dailyRecurrence: $dailyRecurrence, reminders: $reminders, iconCode: $iconCode, colorHex: $colorHex, completedDates: $completedDates, lastCompletedAt: $lastCompletedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Habito(uuid: $uuid, id: $id, nome: $nome, descricao: $descricao, regularityDays: $regularityDays, dailyRecurrence: $dailyRecurrence, reminders: $reminders, iconCode: $iconCode, colorHex: $colorHex, completedDates: $completedDates, lastCompletedAt: $lastCompletedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -387,8 +370,8 @@ class _$HabitoImpl implements _Habito {
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nome, nome) || other.nome == nome) &&
-            (identical(other.affirmation, affirmation) ||
-                other.affirmation == affirmation) &&
+            (identical(other.descricao, descricao) ||
+                other.descricao == descricao) &&
             const DeepCollectionEquality()
                 .equals(other._regularityDays, _regularityDays) &&
             (identical(other.dailyRecurrence, dailyRecurrence) ||
@@ -416,7 +399,7 @@ class _$HabitoImpl implements _Habito {
       uuid,
       id,
       nome,
-      affirmation,
+      descricao,
       const DeepCollectionEquality().hash(_regularityDays),
       dailyRecurrence,
       const DeepCollectionEquality().hash(_reminders),
@@ -448,8 +431,7 @@ abstract class _Habito implements Habito {
       {required final String uuid,
       final int? id,
       required final String nome,
-      @JsonKey(toJson: _$AffirmationToJson)
-      required final Affirmation affirmation,
+      final String? descricao,
       @JsonKey(name: 'regularity_days') final List<String> regularityDays,
       @JsonKey(name: 'daily_recurrence') final int dailyRecurrence,
       final List<String> reminders,
@@ -473,8 +455,7 @@ abstract class _Habito implements Habito {
   @override
   String get nome;
   @override
-  @JsonKey(toJson: _$AffirmationToJson)
-  Affirmation get affirmation;
+  String? get descricao;
   @override
   @JsonKey(name: 'regularity_days')
   List<String> get regularityDays;
@@ -507,172 +488,5 @@ abstract class _Habito implements Habito {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HabitoImplCopyWith<_$HabitoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Affirmation _$AffirmationFromJson(Map<String, dynamic> json) {
-  return _Affirmation.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Affirmation {
-  String get type => throw _privateConstructorUsedError;
-  String get text => throw _privateConstructorUsedError;
-
-  /// Serializes this Affirmation to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Affirmation
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $AffirmationCopyWith<Affirmation> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AffirmationCopyWith<$Res> {
-  factory $AffirmationCopyWith(
-          Affirmation value, $Res Function(Affirmation) then) =
-      _$AffirmationCopyWithImpl<$Res, Affirmation>;
-  @useResult
-  $Res call({String type, String text});
-}
-
-/// @nodoc
-class _$AffirmationCopyWithImpl<$Res, $Val extends Affirmation>
-    implements $AffirmationCopyWith<$Res> {
-  _$AffirmationCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Affirmation
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? type = null,
-    Object? text = null,
-  }) {
-    return _then(_value.copyWith(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$AffirmationImplCopyWith<$Res>
-    implements $AffirmationCopyWith<$Res> {
-  factory _$$AffirmationImplCopyWith(
-          _$AffirmationImpl value, $Res Function(_$AffirmationImpl) then) =
-      __$$AffirmationImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String type, String text});
-}
-
-/// @nodoc
-class __$$AffirmationImplCopyWithImpl<$Res>
-    extends _$AffirmationCopyWithImpl<$Res, _$AffirmationImpl>
-    implements _$$AffirmationImplCopyWith<$Res> {
-  __$$AffirmationImplCopyWithImpl(
-      _$AffirmationImpl _value, $Res Function(_$AffirmationImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Affirmation
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? type = null,
-    Object? text = null,
-  }) {
-    return _then(_$AffirmationImpl(
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$AffirmationImpl implements _Affirmation {
-  _$AffirmationImpl({required this.type, required this.text});
-
-  factory _$AffirmationImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AffirmationImplFromJson(json);
-
-  @override
-  final String type;
-  @override
-  final String text;
-
-  @override
-  String toString() {
-    return 'Affirmation(type: $type, text: $text)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AffirmationImpl &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.text, text) || other.text == text));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, type, text);
-
-  /// Create a copy of Affirmation
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AffirmationImplCopyWith<_$AffirmationImpl> get copyWith =>
-      __$$AffirmationImplCopyWithImpl<_$AffirmationImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AffirmationImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Affirmation implements Affirmation {
-  factory _Affirmation(
-      {required final String type,
-      required final String text}) = _$AffirmationImpl;
-
-  factory _Affirmation.fromJson(Map<String, dynamic> json) =
-      _$AffirmationImpl.fromJson;
-
-  @override
-  String get type;
-  @override
-  String get text;
-
-  /// Create a copy of Affirmation
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AffirmationImplCopyWith<_$AffirmationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

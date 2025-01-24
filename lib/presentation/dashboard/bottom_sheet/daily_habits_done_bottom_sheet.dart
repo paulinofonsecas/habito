@@ -57,7 +57,9 @@ class _DailyHabitsDoneBottomSheetState
           itemCount: dailyHabitsDone.habitosConcluidos.length,
           itemBuilder: (context, index) {
             final habito = dailyHabitsDone.habitosConcluidos[index];
-            return HabitCard(habito: habito);
+            return HabitCard(
+              habito: habito,
+            );
           },
         );
       },

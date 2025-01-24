@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habito_2/presentation/create_habito/provider/provider.dart';
 import 'package:habito_2/presentation/create_habito/widgets/create_habito_body.dart';
+import 'package:habito_2/presentation/dashboard/provider/dashboard_provider.dart';
 
 /// {@template create_habito_page}
 /// A description for CreateHabitoPage
@@ -32,9 +33,17 @@ class CreateHabitoPage extends StatelessWidget {
             actions: [
               IconButton(
                 icon: const Icon(Icons.check),
-                onPressed: () {
-                  Provider.of<CreateHabitoNotifier>(context, listen: false)
+                onPressed: () async {
+                  await Provider.of<CreateHabitoNotifier>(context,
+                          listen: false)
                       .submitForm();
+
+                  if (context.mounted) {
+                    Provider.of<DashboardNotifier>(context, listen: false)
+                        .listarHabitos();
+
+                    Navigator.of(context).pop();
+                  }
                 },
               ),
             ],

@@ -8,18 +8,13 @@ int _colorHexFromJson(String? colorHex) =>
 
 String _colorHexToJson(int? colorHex) => '#${colorHex?.toRadixString(16)}';
 
-Map<String, dynamic> _$AffirmationToJson(Affirmation affirmation) => {
-      'type': affirmation.type,
-      'text': affirmation.text,
-    };
-
 @freezed
 class Habito with _$Habito {
   factory Habito({
     required String uuid,
     int? id,
     required String nome,
-    @JsonKey(toJson: _$AffirmationToJson) required Affirmation affirmation,
+    String? descricao,
     @JsonKey(name: 'regularity_days') @Default([]) List<String> regularityDays,
     @JsonKey(name: 'daily_recurrence') @Default(1) int dailyRecurrence,
     @Default([]) List<String> reminders,
@@ -38,22 +33,16 @@ class Habito with _$Habito {
   factory Habito.fromJson(Map<String, dynamic> json) => _$HabitoFromJson(json);
 }
 
-@freezed
-class Affirmation with _$Affirmation {
-  factory Affirmation({
-    required String type,
-    required String text,
-  }) = _Affirmation;
-
-  factory Affirmation.fromJson(Map<String, dynamic> json) =>
-      _$AffirmationFromJson(json);
-}
-
 extension HabitoX on Habito {
   bool get isCompletedToday => completedDates.any((date) =>
       date.year == DateTime.now().year &&
       date.month == DateTime.now().month &&
       date.day == DateTime.now().day);
+
+  bool isCompletedToday2(DateTime comparedDate) => completedDates.any((date) =>
+      date.year == comparedDate.year &&
+      date.month == comparedDate.month &&
+      date.day == comparedDate.day);
 
   int get currentStreak {
     if (completedDates.isEmpty) return 0;

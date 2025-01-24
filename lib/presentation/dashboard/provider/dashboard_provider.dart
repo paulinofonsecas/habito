@@ -18,6 +18,8 @@ class DashboardNotifier with ChangeNotifier {
   final List<Habito> _habitos = [];
   var isLoading = false;
 
+  DateTime focusedDate = DateTime.now();
+
   List<Habito> get habitos {
     return _habitos
       ..sort((Habito a, Habito b) => b.createdAt!.compareTo(a.createdAt!));
@@ -29,7 +31,7 @@ class DashboardNotifier with ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    final habitos = await obterListaHabitosUseCase.executar();
+    final habitos = await obterListaHabitosUseCase.executar(focusedDate);
 
     _habitos.clear();
     _habitos.addAll(habitos);
@@ -39,13 +41,20 @@ class DashboardNotifier with ChangeNotifier {
     notifyListeners();
   }
 
-  concluirHabito(Habito habito) async {
-    await marcarHabitoConcluidoUseCase.executar(habitoId: habito.uuid);
+  concluirHabito(Habito habito, DateTime? dataConclusao) async {
+    await marcarHabitoConcluidoUseCase.executar(
+        habitoId: habito.uuid, dataConclusao: dataConclusao);
     return listarHabitos();
   }
 
-  desconcluirHabito(Habito habito) async {
-    await desmarcarHabitoConcluidoUseCase.executar(habitoId: habito.uuid);
+  desconcluirHabito(Habito habito, DateTime? dataConclusao) async {
+    await desmarcarHabitoConcluidoUseCase.executar(
+        habitoId: habito.uuid, dataConclusao: dataConclusao);
+    return listarHabitos();
+  }
+
+  void changeDate(DateTime newFocusedDate) async {
+    focusedDate = newFocusedDate;
     return listarHabitos();
   }
 }

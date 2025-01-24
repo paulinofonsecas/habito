@@ -9,16 +9,25 @@ class CreateHabitoNotifier with ChangeNotifier {
 
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController goalController = TextEditingController();
+  final TextEditingController descricaoController = TextEditingController();
+
+  var selectedTime = DateTime.now();
 
   final List<String> daysOfWeek = [
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-    'Sun'
+    // 'Mon',
+    // 'Tue',
+    // 'Wed',
+    // 'Thu',
+    // 'Fri',
+    // 'Sat',
+    // 'Sun',
+    'Seg',
+    'Ter',
+    'Qua',
+    'Qui',
+    'Sex',
+    'Sab',
+    'Dom',
   ];
   final List<String> selectedDays = [];
   int dailyRecurrence2 = 1;
@@ -73,13 +82,12 @@ class CreateHabitoNotifier with ChangeNotifier {
     }
   }
 
-  void submitForm() async {
+  Future<void> submitForm() async {
     if (formKey.currentState!.validate()) {
       final newHabit = Habito(
         uuid: Uuid().v4(),
         nome: nameController.text,
-        affirmation: Affirmation(
-            type: selectedAffirmation ?? '', text: goalController.text),
+        descricao: descricaoController.text,
         regularityDays: selectedDays,
         dailyRecurrence: dailyRecurrence2,
         iconCode: selectedIconIndex != null
@@ -88,7 +96,9 @@ class CreateHabitoNotifier with ChangeNotifier {
         colorHex: selectedColorIndex != null
             ? colors[selectedColorIndex!].value
             : null,
-        completedDates: [],
+        completedDates: [
+          DateTime(2025, 01, 23),
+        ],
         lastCompletedAt: null,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
@@ -97,7 +107,7 @@ class CreateHabitoNotifier with ChangeNotifier {
       await createHabitoUseCase.executar(novoHabito: newHabit);
 
       nameController.clear();
-      goalController.clear();
+      descricaoController.clear();
       selectedDays.clear();
       dailyRecurrence2 = 1;
       selectedIconIndex = null;
@@ -109,5 +119,61 @@ class CreateHabitoNotifier with ChangeNotifier {
       throw Exception(
           'Formulário inválido. Por favor, preencha todos os campos.');
     }
+  }
+
+  bool get isAllDaysSelected {
+    return selectedDays.length == daysOfWeek.length;
+  }
+
+  void toggleSelectAllDays() {
+    if (isAllDaysSelected) {
+      selectedDays.clear();
+    } else {
+      selectedDays.clear();
+      selectedDays.addAll(daysOfWeek);
+    }
+    notifyListeners();
+  }
+
+  void toggleDay(String day) {
+    if (selectedDays.contains(day)) {
+      selectedDays.remove(day);
+    } else {
+      selectedDays.add(day);
+    }
+    notifyListeners();
+  }
+
+  void showMyTimePicker(BuildContext context) async {
+    final result = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(selectedTime),
+      confirmText: 'Salvar',
+      cancelText: 'Cancelar',
+      helpText: 'Selecione um horário',
+    );
+
+    if (result != null) {
+      selectedTime = DateTime(
+        selectedTime.year,
+        selectedTime.month,
+        selectedTime.day,
+        result.hour,
+        result.minute,
+      );
+      notifyListeners();
+    }
+  }
+
+  void decrementDailyRecurrence() {
+    if (dailyRecurrence2 > 1) {
+      dailyRecurrence2--;
+    }
+    notifyListeners();
+  }
+
+  void incrementDailyRecurrence() {
+    dailyRecurrence2++;
+    notifyListeners();
   }
 }

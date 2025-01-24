@@ -10,8 +10,7 @@ _$HabitoImpl _$$HabitoImplFromJson(Map<String, dynamic> json) => _$HabitoImpl(
       uuid: json['uuid'] as String,
       id: (json['id'] as num?)?.toInt(),
       nome: json['nome'] as String,
-      affirmation:
-          Affirmation.fromJson(json['affirmation'] as Map<String, dynamic>),
+      descricao: json['descricao'] as String?,
       regularityDays: (json['regularity_days'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -43,7 +42,7 @@ Map<String, dynamic> _$$HabitoImplToJson(_$HabitoImpl instance) =>
       'uuid': instance.uuid,
       'id': instance.id,
       'nome': instance.nome,
-      'affirmation': _$AffirmationToJson(instance.affirmation),
+      'descricao': instance.descricao,
       'regularity_days': instance.regularityDays,
       'daily_recurrence': instance.dailyRecurrence,
       'reminders': instance.reminders,
@@ -54,16 +53,4 @@ Map<String, dynamic> _$$HabitoImplToJson(_$HabitoImpl instance) =>
       'last_completed_at': instance.lastCompletedAt?.toIso8601String(),
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
-    };
-
-_$AffirmationImpl _$$AffirmationImplFromJson(Map<String, dynamic> json) =>
-    _$AffirmationImpl(
-      type: json['type'] as String,
-      text: json['text'] as String,
-    );
-
-Map<String, dynamic> _$$AffirmationImplToJson(_$AffirmationImpl instance) =>
-    <String, dynamic>{
-      'type': instance.type,
-      'text': instance.text,
     };
