@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:habito_2/app/dependencies/getit_service_locator.dart';
 import 'package:habito_2/domain/entities/habito/habito.dart';
+import 'package:habito_2/presentation/dashboard/dialogs/arquivar_habito_dialog.dart';
 import 'package:habito_2/presentation/dashboard/provider/daily_habits_done_provider.dart';
 import 'package:habito_2/presentation/dashboard/provider/provider.dart';
 
 class HabitoDetailBottomSheet extends StatefulWidget {
-  const HabitoDetailBottomSheet({super.key, required this.habito});
+  const HabitoDetailBottomSheet({super.key, required this.extHabito});
 
-  final Habito habito;
+  final Habito extHabito;
 
   static void show(BuildContext context, Habito habito) {
     showModalBottomSheet(
@@ -24,7 +26,7 @@ class HabitoDetailBottomSheet extends StatefulWidget {
               ),
             ),
           ],
-          child: HabitoDetailBottomSheet(habito: habito),
+          child: HabitoDetailBottomSheet(extHabito: habito),
         );
       },
     );
@@ -36,6 +38,14 @@ class HabitoDetailBottomSheet extends StatefulWidget {
 }
 
 class _HabitoDetailBottomSheetState extends State<HabitoDetailBottomSheet> {
+  late Habito habito;
+
+  @override
+  void initState() {
+    habito = widget.extHabito;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,39 +57,93 @@ class _HabitoDetailBottomSheetState extends State<HabitoDetailBottomSheet> {
         children: [
           Row(
             children: [
-              if (widget.habito.iconCode != null)
+              if (habito.iconCode != null)
                 Container(
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    color:
-                        Color(widget.habito.colorHex!).withValues(alpha: .08),
+                    color: Color(habito.colorHex!).withValues(alpha: .08),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Icon(
-                    IconData(widget.habito.iconCode!,
-                        fontFamily: 'MaterialIcons'),
-                    color: Color(widget.habito.colorHex!),
+                    IconData(habito.iconCode!, fontFamily: 'MaterialIcons'),
+                    color: Color(habito.colorHex!),
                     size: 32.0,
                   ),
                 ),
               Gutter(),
               Text(
-                widget.habito.nome,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                habito.nome,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
+              Spacer(),
+              IconButton(
+                icon: Icon(
+                  habito.isActive != true ? Icons.unarchive : Icons.archive,
+                  color: habito.isActive != true
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.error,
+                ),
+                onPressed: () async {
+                  final result = await ArquivarDialog.show(
+                    context,
+                    value: habito.isActive!,
+                  );
+
+                  if (result == true && context.mounted) {
+                    if (habito.isActive == true) {
+                      Provider.of<DashboardNotifier>(context, listen: false)
+                          .arquivarHabito(habito);
+                      habito = habito.copyWith(isActive: false);
+                    } else {
+                      Provider.of<DashboardNotifier>(context, listen: false)
+                          .desarquivarHabito(habito);
+                      habito = habito.copyWith(isActive: true);
+                    }
+
+                    setState(() {});
+                  }
+                },
+              ),
+              IconButton(
+                icon: Icon(FontAwesomeIcons.penToSquare,
+                    color: Theme.of(context).colorScheme.primary),
+                onPressed: () async {
+                  final result = await ArquivarDialog.show(
+                    context,
+                    value: habito.isActive!,
+                  );
+
+                  if (result == true && context.mounted) {
+                    if (habito.isActive == true) {
+                      Provider.of<DashboardNotifier>(context, listen: false)
+                          .arquivarHabito(habito);
+                      habito = habito.copyWith(isActive: false);
+                    } else {
+                      Provider.of<DashboardNotifier>(context, listen: false)
+                          .desarquivarHabito(habito);
+                      habito = habito.copyWith(isActive: true);
+                    }
+
+                    setState(() {});
+                  }
+                },
+              )
             ],
           ),
-          if (widget.habito.descricao != null)
+          if (habito.descricao != null)
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gutter(),
                 Text(
                   'Descrição: ',
                 ),
                 Text(
-                  widget.habito.descricao!,
+                  habito.descricao!,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w500,
                       ),
@@ -90,47 +154,76 @@ class _HabitoDetailBottomSheetState extends State<HabitoDetailBottomSheet> {
           Text(
             'Frequência: ',
           ),
-          Text(
-            remindersToString(widget.habito.regularityDays),
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w500,
+          GutterTiny(),
+          if (habito.regularityDays.length == 7)
+            Container(
+              padding: const EdgeInsets.all(8),
+              margin: const EdgeInsets.only(right: 8),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'Todos os dias',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
                 ),
-          ),
-          GutterSmall(),
+              ),
+            )
+          else
+            Row(
+              children: habito.regularityDays
+                  .map((e) => Container(
+                        padding: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.only(right: 8),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          e,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                      ))
+                  .toList(),
+            ),
+          Gutter(),
           Text(
             'Recorrencia: ',
           ),
           Text(
-            '${widget.habito.dailyRecurrence} vezes por dia',
+            '${habito.dailyRecurrence} vezes por dia',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          GutterSmall(),
+          Gutter(),
           Text(
             'Lembrete: ',
           ),
           Text(
-            '${widget.habito.reminders.length} lembretes',
+            '${habito.reminders.length} lembretes',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
           ),
           GutterLarge(),
-          Text('Histórico (${widget.habito.completedDates.length})',
+          Text('Histórico (${habito.completedDates.length})',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   )),
           GutterSmall(),
           Wrap(
             spacing: 8,
-            children: widget.habito.completedDates
+            children: habito.completedDates
                 .map(
                   (reminder) => Container(
                     width: 10,
                     height: 10,
                     decoration: BoxDecoration(
-                      color: Color(widget.habito.colorHex!),
+                      color: Color(habito.colorHex!),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -143,6 +236,14 @@ class _HabitoDetailBottomSheetState extends State<HabitoDetailBottomSheet> {
   }
 
   String remindersToString(List<String> reminders) {
+    if (reminders.isEmpty) {
+      return 'Nenhuma';
+    }
+
+    if (reminders.length == 7) {
+      return 'Todos os dias';
+    }
+
     return reminders.join(', ');
   }
 }

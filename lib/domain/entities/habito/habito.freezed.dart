@@ -37,6 +37,7 @@ mixin _$Habito {
   List<DateTime> get completedDates => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_completed_at')
   DateTime? get lastCompletedAt => throw _privateConstructorUsedError;
+  bool? get isActive => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -72,6 +73,7 @@ abstract class $HabitoCopyWith<$Res> {
       int? colorHex,
       @JsonKey(name: 'completed_dates') List<DateTime> completedDates,
       @JsonKey(name: 'last_completed_at') DateTime? lastCompletedAt,
+      bool? isActive,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -102,6 +104,7 @@ class _$HabitoCopyWithImpl<$Res, $Val extends Habito>
     Object? colorHex = freezed,
     Object? completedDates = null,
     Object? lastCompletedAt = freezed,
+    Object? isActive = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -150,6 +153,10 @@ class _$HabitoCopyWithImpl<$Res, $Val extends Habito>
           ? _value.lastCompletedAt
           : lastCompletedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -185,6 +192,7 @@ abstract class _$$HabitoImplCopyWith<$Res> implements $HabitoCopyWith<$Res> {
       int? colorHex,
       @JsonKey(name: 'completed_dates') List<DateTime> completedDates,
       @JsonKey(name: 'last_completed_at') DateTime? lastCompletedAt,
+      bool? isActive,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -213,6 +221,7 @@ class __$$HabitoImplCopyWithImpl<$Res>
     Object? colorHex = freezed,
     Object? completedDates = null,
     Object? lastCompletedAt = freezed,
+    Object? isActive = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -261,6 +270,10 @@ class __$$HabitoImplCopyWithImpl<$Res>
           ? _value.lastCompletedAt
           : lastCompletedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -294,6 +307,7 @@ class _$HabitoImpl implements _Habito {
       @JsonKey(name: 'completed_dates')
       final List<DateTime> completedDates = const <DateTime>[],
       @JsonKey(name: 'last_completed_at') this.lastCompletedAt,
+      this.isActive = true,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt})
       : _regularityDays = regularityDays,
@@ -351,6 +365,9 @@ class _$HabitoImpl implements _Habito {
   @JsonKey(name: 'last_completed_at')
   final DateTime? lastCompletedAt;
   @override
+  @JsonKey()
+  final bool? isActive;
+  @override
   @JsonKey(name: 'created_at')
   final DateTime? createdAt;
   @override
@@ -359,7 +376,7 @@ class _$HabitoImpl implements _Habito {
 
   @override
   String toString() {
-    return 'Habito(uuid: $uuid, id: $id, nome: $nome, descricao: $descricao, regularityDays: $regularityDays, dailyRecurrence: $dailyRecurrence, reminders: $reminders, iconCode: $iconCode, colorHex: $colorHex, completedDates: $completedDates, lastCompletedAt: $lastCompletedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Habito(uuid: $uuid, id: $id, nome: $nome, descricao: $descricao, regularityDays: $regularityDays, dailyRecurrence: $dailyRecurrence, reminders: $reminders, iconCode: $iconCode, colorHex: $colorHex, completedDates: $completedDates, lastCompletedAt: $lastCompletedAt, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -386,6 +403,8 @@ class _$HabitoImpl implements _Habito {
                 .equals(other._completedDates, _completedDates) &&
             (identical(other.lastCompletedAt, lastCompletedAt) ||
                 other.lastCompletedAt == lastCompletedAt) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -407,6 +426,7 @@ class _$HabitoImpl implements _Habito {
       colorHex,
       const DeepCollectionEquality().hash(_completedDates),
       lastCompletedAt,
+      isActive,
       createdAt,
       updatedAt);
 
@@ -443,6 +463,7 @@ abstract class _Habito implements Habito {
       final int? colorHex,
       @JsonKey(name: 'completed_dates') final List<DateTime> completedDates,
       @JsonKey(name: 'last_completed_at') final DateTime? lastCompletedAt,
+      final bool? isActive,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt}) = _$HabitoImpl;
 
@@ -476,6 +497,8 @@ abstract class _Habito implements Habito {
   @override
   @JsonKey(name: 'last_completed_at')
   DateTime? get lastCompletedAt;
+  @override
+  bool? get isActive;
   @override
   @JsonKey(name: 'created_at')
   DateTime? get createdAt;

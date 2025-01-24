@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:habito_2/app/providers/app_provider.dart';
+import 'package:habito_2/presentation/create_habito/provider/provider.dart';
 import 'package:habito_2/presentation/create_habito/view/create_habito_page.dart';
 import 'package:habito_2/presentation/dashboard/widgets/dashboard_body.dart';
 
@@ -16,18 +18,22 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appNotifier = Provider.of<AppNotifier>(context);
+
     return Builder(builder: (context) {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Meus Hábitos'),
           actions: [
-            // IconButton(
-            //   onPressed: () {
-            //     // DailyHabitsDoneBottomSheet.show(context);
-            //   },
-            //   icon: Icon(Icons.done_all),
-            // ),
-            // SizedBox(width: 16),
+            IconButton(
+              onPressed: () {
+                appNotifier.toggleTheme();
+              },
+              icon: Icon(
+                appNotifier.isDarkMode ? Icons.dark_mode : Icons.light_mode,
+              ),
+            ),
+            SizedBox(width: 16),
           ],
         ),
         body: DashboardView(),

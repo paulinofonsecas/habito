@@ -26,6 +26,7 @@ class Habito with _$Habito {
     @Default(<DateTime>[])
     List<DateTime> completedDates,
     @JsonKey(name: 'last_completed_at') DateTime? lastCompletedAt,
+    @Default(true) bool? isActive,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _Habito;

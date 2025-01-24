@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
+import 'package:habito_2/presentation/create_habito/bottom_sheets/select_icon_list_bottom_sheet.dart';
 import 'package:habito_2/presentation/create_habito/create_habito.dart';
 import 'package:habito_2/presentation/create_habito/provider/provider.dart';
 
@@ -45,6 +46,9 @@ class _CreateHabitoBodyState extends State<CreateHabitoBody> {
               decoration: const InputDecoration(
                 labelText: 'Nome',
                 hintText: 'Ler 10 paginas',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                ),
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -59,6 +63,9 @@ class _CreateHabitoBodyState extends State<CreateHabitoBody> {
               decoration: const InputDecoration(
                 labelText: 'Descrição',
                 hintText: 'Ler 10 ou mais paginas ante de dormir',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                ),
               ),
               maxLines: 1,
             ),
@@ -152,11 +159,16 @@ class _CreateHabitoBodyState extends State<CreateHabitoBody> {
           );
         }),
         TextButton(
-          onPressed: () {
-            // TODO: Implement show more icons action
-            print('More Icons button pressed');
+          onPressed: () async {
+            IconData? icon = await SelectIconListBottomSheet.show(context);
+
+            if (icon != null) {
+              setState(() {
+                createHabitoNotifier.changeIcon(icon);
+              });
+            }
           },
-          child: const Text('More Icons >'),
+          child: const Text('Mais Icons >'),
         ),
       ],
     );

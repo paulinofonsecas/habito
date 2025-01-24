@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habito_2/presentation/create_habito/provider/provider.dart';
+import 'package:habito_2/presentation/create_habito/provider/select_icon_list_provider.dart';
 import 'package:habito_2/presentation/create_habito/widgets/create_habito_body.dart';
 import 'package:habito_2/presentation/dashboard/provider/dashboard_provider.dart';
 
@@ -17,8 +18,11 @@ class CreateHabitoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CreateHabitoNotifier(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CreateHabitoNotifier()),
+        ChangeNotifierProvider(create: (context) => SelectIconListProvider()),
+      ],
       child: Builder(builder: (context) {
         return Scaffold(
           appBar: AppBar(
@@ -28,7 +32,7 @@ class CreateHabitoPage extends StatelessWidget {
                 Navigator.of(context).pop();
               },
             ),
-            title: const Text('New Habit'),
+            title: const Text('Novo Hábito'),
             centerTitle: true,
             actions: [
               IconButton(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:habito_2/app/dependencies/getit_service_locator.dart';
 import 'package:habito_2/domain/entities/habito/habito.dart';
 import 'package:habito_2/domain/usecases/habito_usecases.dart';
@@ -28,19 +29,21 @@ class CreateHabitoNotifier with ChangeNotifier {
   int? selectedColorIndex;
   String? selectedAffirmation;
 
-  final List<IconData> icons = [
-    Icons.favorite,
-    Icons.facebook,
-    Icons.camera_alt,
-    Icons.coffee,
-    Icons.fastfood,
-    Icons.movie,
-    Icons.bed,
-    Icons.celebration,
-    Icons.business,
-    Icons.fitness_center,
-    Icons.tv,
-    Icons.music_note
+  List<IconData> icons = [
+    FontAwesomeIcons.heartbeat, // Saúde Física (bem-estar geral)
+    FontAwesomeIcons.running, // Saúde Física (atividade física)
+    FontAwesomeIcons.brain, // Saúde Mental (bem-estar mental)
+    FontAwesomeIcons.bookOpen, // Saúde Mental (aprendizado e crescimento)
+    FontAwesomeIcons.briefcase, // Produtividade (trabalho)
+    FontAwesomeIcons.calendarAlt, // Produtividade (organização e planejamento)
+    FontAwesomeIcons.heart, // Relacionamentos (conexões)
+    FontAwesomeIcons.userFriends, // Relacionamentos (amizades)
+    FontAwesomeIcons.piggyBank, // Finanças (economia)
+    FontAwesomeIcons.moneyBillAlt, // Finanças (controle financeiro)
+    FontAwesomeIcons
+        .bell, // Notificações (lembretes e avisos) - ícone adicional
+    FontAwesomeIcons
+        .chartBar, // Progresso Geral (visualização do progresso) - ícone adicional
   ];
 
   final List<Color> colors = [
@@ -166,6 +169,17 @@ class CreateHabitoNotifier with ChangeNotifier {
 
   void incrementDailyRecurrence() {
     dailyRecurrence2++;
+    notifyListeners();
+  }
+
+  void changeIcon(IconData icon) {
+    if (!icons.contains(icon)) {
+      icons.removeAt(0);
+      icons.insert(0, icon);
+      selectedIconIndex = icons.indexOf(icon);
+    } else {
+      selectedIconIndex = icons.indexOf(icon);
+    }
     notifyListeners();
   }
 }

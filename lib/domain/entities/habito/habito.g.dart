@@ -29,6 +29,7 @@ _$HabitoImpl _$$HabitoImplFromJson(Map<String, dynamic> json) => _$HabitoImpl(
       lastCompletedAt: json['last_completed_at'] == null
           ? null
           : DateTime.parse(json['last_completed_at'] as String),
+      isActive: json['isActive'] as bool? ?? true,
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
@@ -51,6 +52,7 @@ Map<String, dynamic> _$$HabitoImplToJson(_$HabitoImpl instance) =>
       'completed_dates':
           instance.completedDates.map((e) => e.toIso8601String()).toList(),
       'last_completed_at': instance.lastCompletedAt?.toIso8601String(),
+      'isActive': instance.isActive,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };

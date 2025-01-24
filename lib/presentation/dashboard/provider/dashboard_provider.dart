@@ -12,6 +12,7 @@ class DashboardNotifier with ChangeNotifier {
   // --- Use Cases (Get instances from GetIt) ---
   final createHabitoUseCase = sl<CriarHabitoUseCase>();
   final obterListaHabitosUseCase = sl<ObterListaHabitosUseCase>();
+  final updateHabitoUseCase = sl<AtualizarHabitoUseCase>();
   final marcarHabitoConcluidoUseCase = sl<MarcarHabitoConcluidoUseCase>();
   final desmarcarHabitoConcluidoUseCase = sl<DesmarcarHabitoConcluidoUseCase>();
 
@@ -55,6 +56,20 @@ class DashboardNotifier with ChangeNotifier {
 
   void changeDate(DateTime newFocusedDate) async {
     focusedDate = newFocusedDate;
+    return listarHabitos();
+  }
+
+  void arquivarHabito(Habito habito) async {
+    final newHabito = habito.copyWith(isActive: false);
+    await updateHabitoUseCase.executar(habito: newHabito);
+
+    return listarHabitos();
+  }
+
+  void desarquivarHabito(Habito habito) async {
+    final newHabito = habito.copyWith(isActive: true);
+    await updateHabitoUseCase.executar(habito: newHabito);
+
     return listarHabitos();
   }
 }

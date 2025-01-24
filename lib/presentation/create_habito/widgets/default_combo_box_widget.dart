@@ -16,7 +16,9 @@ class DefaultComboBoxWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Theme.of(context).primaryColor),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: .7),
+        ),
       ),
       child: child,
     );

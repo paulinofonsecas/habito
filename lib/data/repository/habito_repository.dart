@@ -32,7 +32,7 @@ class HabitoRepository {
     //       .toList();
     // } else {
     // }
-      return habitos;
+    return habitos.where((habito) => habito.isActive == true).toList();
   }
 
   Future<List<Habito>> getConcluidos() async {
