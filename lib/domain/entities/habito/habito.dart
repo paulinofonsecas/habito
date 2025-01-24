@@ -17,7 +17,7 @@ class Habito with _$Habito {
     String? descricao,
     @JsonKey(name: 'regularity_days') @Default([]) List<String> regularityDays,
     @JsonKey(name: 'daily_recurrence') @Default(1) int dailyRecurrence,
-    @Default([]) List<String> reminders,
+    @Default([]) List<DateTime> reminders,
     int? iconCode,
     @JsonKey(
         name: 'color_hex', fromJson: _colorHexFromJson, toJson: _colorHexToJson)

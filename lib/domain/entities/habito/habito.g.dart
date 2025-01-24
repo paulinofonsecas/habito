@@ -17,7 +17,7 @@ _$HabitoImpl _$$HabitoImplFromJson(Map<String, dynamic> json) => _$HabitoImpl(
           const [],
       dailyRecurrence: (json['daily_recurrence'] as num?)?.toInt() ?? 1,
       reminders: (json['reminders'] as List<dynamic>?)
-              ?.map((e) => e as String)
+              ?.map((e) => DateTime.parse(e as String))
               .toList() ??
           const [],
       iconCode: (json['iconCode'] as num?)?.toInt(),
@@ -45,7 +45,7 @@ Map<String, dynamic> _$$HabitoImplToJson(_$HabitoImpl instance) =>
       'descricao': instance.descricao,
       'regularity_days': instance.regularityDays,
       'daily_recurrence': instance.dailyRecurrence,
-      'reminders': instance.reminders,
+      'reminders': instance.reminders.map((e) => e.toIso8601String()).toList(),
       'iconCode': instance.iconCode,
       'color_hex': _colorHexToJson(instance.colorHex),
       'completed_dates':

@@ -14,13 +14,6 @@ class CreateHabitoNotifier with ChangeNotifier {
   var selectedTime = DateTime.now();
 
   final List<String> daysOfWeek = [
-    // 'Mon',
-    // 'Tue',
-    // 'Wed',
-    // 'Thu',
-    // 'Fri',
-    // 'Sat',
-    // 'Sun',
     'Seg',
     'Ter',
     'Qua',
@@ -90,15 +83,14 @@ class CreateHabitoNotifier with ChangeNotifier {
         descricao: descricaoController.text,
         regularityDays: selectedDays,
         dailyRecurrence: dailyRecurrence2,
+        reminders: [selectedTime],
         iconCode: selectedIconIndex != null
             ? icons[selectedIconIndex!].codePoint
             : null,
         colorHex: selectedColorIndex != null
             ? colors[selectedColorIndex!].value
             : null,
-        completedDates: [
-          DateTime(2025, 01, 23),
-        ],
+        completedDates: [],
         lastCompletedAt: null,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),

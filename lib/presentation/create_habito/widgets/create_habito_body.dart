@@ -135,7 +135,7 @@ class _CreateHabitoBodyState extends State<CreateHabitoBody> {
               icon,
               color: createHabitoNotifier.selectedIconIndex == index
                   ? Theme.of(context).colorScheme.onPrimary
-                  : Theme.of(context).primaryColor,
+                  : Theme.of(context).colorScheme.primary,
             ),
             onPressed: () {
               setState(() {

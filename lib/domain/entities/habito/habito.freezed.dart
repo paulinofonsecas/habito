@@ -28,7 +28,7 @@ mixin _$Habito {
   List<String> get regularityDays => throw _privateConstructorUsedError;
   @JsonKey(name: 'daily_recurrence')
   int get dailyRecurrence => throw _privateConstructorUsedError;
-  List<String> get reminders => throw _privateConstructorUsedError;
+  List<DateTime> get reminders => throw _privateConstructorUsedError;
   int? get iconCode => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'color_hex', fromJson: _colorHexFromJson, toJson: _colorHexToJson)
@@ -63,7 +63,7 @@ abstract class $HabitoCopyWith<$Res> {
       String? descricao,
       @JsonKey(name: 'regularity_days') List<String> regularityDays,
       @JsonKey(name: 'daily_recurrence') int dailyRecurrence,
-      List<String> reminders,
+      List<DateTime> reminders,
       int? iconCode,
       @JsonKey(
           name: 'color_hex',
@@ -133,7 +133,7 @@ class _$HabitoCopyWithImpl<$Res, $Val extends Habito>
       reminders: null == reminders
           ? _value.reminders
           : reminders // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<DateTime>,
       iconCode: freezed == iconCode
           ? _value.iconCode
           : iconCode // ignore: cast_nullable_to_non_nullable
@@ -176,7 +176,7 @@ abstract class _$$HabitoImplCopyWith<$Res> implements $HabitoCopyWith<$Res> {
       String? descricao,
       @JsonKey(name: 'regularity_days') List<String> regularityDays,
       @JsonKey(name: 'daily_recurrence') int dailyRecurrence,
-      List<String> reminders,
+      List<DateTime> reminders,
       int? iconCode,
       @JsonKey(
           name: 'color_hex',
@@ -244,7 +244,7 @@ class __$$HabitoImplCopyWithImpl<$Res>
       reminders: null == reminders
           ? _value._reminders
           : reminders // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<DateTime>,
       iconCode: freezed == iconCode
           ? _value.iconCode
           : iconCode // ignore: cast_nullable_to_non_nullable
@@ -284,7 +284,7 @@ class _$HabitoImpl implements _Habito {
       @JsonKey(name: 'regularity_days')
       final List<String> regularityDays = const [],
       @JsonKey(name: 'daily_recurrence') this.dailyRecurrence = 1,
-      final List<String> reminders = const [],
+      final List<DateTime> reminders = const [],
       this.iconCode,
       @JsonKey(
           name: 'color_hex',
@@ -323,10 +323,10 @@ class _$HabitoImpl implements _Habito {
   @override
   @JsonKey(name: 'daily_recurrence')
   final int dailyRecurrence;
-  final List<String> _reminders;
+  final List<DateTime> _reminders;
   @override
   @JsonKey()
-  List<String> get reminders {
+  List<DateTime> get reminders {
     if (_reminders is EqualUnmodifiableListView) return _reminders;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_reminders);
@@ -434,7 +434,7 @@ abstract class _Habito implements Habito {
       final String? descricao,
       @JsonKey(name: 'regularity_days') final List<String> regularityDays,
       @JsonKey(name: 'daily_recurrence') final int dailyRecurrence,
-      final List<String> reminders,
+      final List<DateTime> reminders,
       final int? iconCode,
       @JsonKey(
           name: 'color_hex',
@@ -463,7 +463,7 @@ abstract class _Habito implements Habito {
   @JsonKey(name: 'daily_recurrence')
   int get dailyRecurrence;
   @override
-  List<String> get reminders;
+  List<DateTime> get reminders;
   @override
   int? get iconCode;
   @override

@@ -1,3 +1,4 @@
+import 'default_combo_box_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
@@ -50,25 +51,4 @@ class FrequenciaWidget extends StatelessWidget {
   }
 }
 
-class DefaultComboBoxWidget extends StatelessWidget {
-  const DefaultComboBoxWidget({
-    super.key,
-    required this.child,
-  });
 
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 42,
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Theme.of(context).primaryColor),
-      ),
-      child: child,
-    );
-  }
-}

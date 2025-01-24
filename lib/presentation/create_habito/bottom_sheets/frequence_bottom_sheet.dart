@@ -48,7 +48,7 @@ class _FrequenceBottomSheetState extends State<FrequenceBottomSheet> {
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: createHabitoNotifier.selectedDays.contains(day)
-                            ? Theme.of(context).primaryColor
+                            ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -56,8 +56,8 @@ class _FrequenceBottomSheetState extends State<FrequenceBottomSheet> {
                         day,
                         style: TextStyle(
                           color: createHabitoNotifier.selectedDays.contains(day)
-                              ? Colors.white
-                              : Theme.of(context).primaryColor,
+                              ? Theme.of(context).colorScheme.onPrimary
+                              : Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ),
@@ -108,7 +108,8 @@ class _FrequenceBottomSheetState extends State<FrequenceBottomSheet> {
                                 .textTheme
                                 .bodyMedium
                                 ?.copyWith(
-                                  color: Theme.of(context).primaryColor,
+                                  color:
+                                      Theme.of(context).colorScheme.onSurface,
                                   fontWeight: FontWeight.bold,
                                 )),
                       ],
