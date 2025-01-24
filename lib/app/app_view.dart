@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
                   appNotifier.isDarkMode ? Brightness.dark : Brightness.light,
             ),
           ),
+          themeMode: ThemeMode.system,
           home: const DashboardPage(),
         );
       },
