@@ -14,12 +14,12 @@ class MyApp extends StatelessWidget {
       listenable: appNotifier,
       builder: (context, child) {
         return MaterialApp(
-          title: 'Criar Hábito',
+          title: 'A Forja de Hábitos',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             fontFamily: 'Roboto',
             colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.lightBlue,
+              seedColor: Color(0xff3D8FE8),
               brightness:
                   appNotifier.isDarkMode ? Brightness.dark : Brightness.light,
             ),

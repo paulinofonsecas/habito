@@ -23,7 +23,7 @@ class DashboardPage extends StatelessWidget {
     return Builder(builder: (context) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Meus Hábitos'),
+          title: const Text('A Forja de Hábitos'),
           actions: [
             IconButton(
               onPressed: () {

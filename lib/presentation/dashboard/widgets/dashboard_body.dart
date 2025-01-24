@@ -2,7 +2,7 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:habito_2/domain/entities/habito/habito.dart';
-import 'package:habito_2/presentation/dashboard/bottom_sheet/habito_detail_bottom_sheet.dart';
+import 'package:habito_2/presentation/dashboard/bottom_sheets/habito_detail_bottom_sheet.dart';
 import 'package:habito_2/presentation/dashboard/provider/provider.dart';
 import 'package:intl/intl.dart';
 
