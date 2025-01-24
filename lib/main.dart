@@ -33,8 +33,7 @@ class MyApp extends StatelessWidget {
         title: 'Criar Hábito',
         theme: ThemeData(
           fontFamily: 'Roboto',
-          primarySwatch: Colors.blue, // Adjust as needed
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
         ),
         home: const DashboardPage(),
       ),

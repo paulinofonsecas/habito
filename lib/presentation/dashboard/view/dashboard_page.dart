@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:habito_2/presentation/create_habito/view/create_habito_page.dart';
-import 'package:habito_2/presentation/dashboard/bottom_sheet/daily_habits_done_bottom_sheet.dart';
 import 'package:habito_2/presentation/dashboard/widgets/dashboard_body.dart';
 
 /// {@template dashboard_page}
@@ -20,15 +19,15 @@ class DashboardPage extends StatelessWidget {
     return Builder(builder: (context) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Hábitos'),
+          title: const Text('Meus Hábitos'),
           actions: [
-            IconButton(
-              onPressed: () {
-                DailyHabitsDoneBottomSheet.show(context);
-              },
-              icon: Icon(Icons.done_all),
-            ),
-            SizedBox(width: 16),
+            // IconButton(
+            //   onPressed: () {
+            //     // DailyHabitsDoneBottomSheet.show(context);
+            //   },
+            //   icon: Icon(Icons.done_all),
+            // ),
+            // SizedBox(width: 16),
           ],
         ),
         body: DashboardView(),
