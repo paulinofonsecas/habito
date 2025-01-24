@@ -24,8 +24,6 @@ class CreateHabitoPage extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
-                // TODO: Handle close
-                print("Close button pressed");
                 Navigator.of(context).pop();
               },
             ),

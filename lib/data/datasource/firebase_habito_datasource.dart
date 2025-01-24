@@ -66,7 +66,7 @@ class FirebaseHabitoDataSource implements HabitoDataSource {
 
     final data = habito.toJson();
 
-    await _firestore.collection(_collectionName).doc(habito.id).update(data);
+    await _firestore.collection(_collectionName).doc(habito.uuid).update(data);
 
     return habito; // For simplicity, return the updated Habito object as it's already updated locally
   }

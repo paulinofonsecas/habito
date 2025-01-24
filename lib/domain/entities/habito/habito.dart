@@ -16,10 +16,10 @@ Map<String, dynamic> _$AffirmationToJson(Affirmation affirmation) => {
 @freezed
 class Habito with _$Habito {
   factory Habito({
-    required String id,
+    required String uuid,
+    int? id,
     required String nome,
-    @JsonKey( toJson: _$AffirmationToJson)
-    required Affirmation affirmation,
+    @JsonKey(toJson: _$AffirmationToJson) required Affirmation affirmation,
     @JsonKey(name: 'regularity_days') @Default([]) List<String> regularityDays,
     @JsonKey(name: 'daily_recurrence') @Default(1) int dailyRecurrence,
     @Default([]) List<String> reminders,
@@ -28,7 +28,7 @@ class Habito with _$Habito {
         name: 'color_hex', fromJson: _colorHexFromJson, toJson: _colorHexToJson)
     int? colorHex,
     @JsonKey(name: 'completed_dates')
-    @Default([])
+    @Default(<DateTime>[])
     List<DateTime> completedDates,
     @JsonKey(name: 'last_completed_at') DateTime? lastCompletedAt,
     @JsonKey(name: 'created_at') DateTime? createdAt,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habito_2/app/dependencies/getit_service_locator.dart';
 import 'package:habito_2/domain/entities/habito/habito.dart';
 import 'package:habito_2/domain/usecases/habito_usecases.dart';
+import 'package:uuid/uuid.dart';
 
 class CreateHabitoNotifier with ChangeNotifier {
   final createHabitoUseCase = sl<CriarHabitoUseCase>();
@@ -75,7 +76,7 @@ class CreateHabitoNotifier with ChangeNotifier {
   void submitForm() async {
     if (formKey.currentState!.validate()) {
       final newHabit = Habito(
-        id: '',
+        uuid: Uuid().v4(),
         nome: nameController.text,
         affirmation: Affirmation(
             type: selectedAffirmation ?? '', text: goalController.text),

@@ -6,6 +6,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   app_links
   cloud_firestore
   firebase_core
+  sqlite3_flutter_libs
   url_launcher_windows
 )
 

@@ -14,8 +14,7 @@ class HabitoRepository {
   HabitoRepository(this._dataSource);
 
   Future<Habito> createHabito(Habito habito) async {
-    final newHabito = habito.copyWith(id: Uuid().v4());
-    return await _dataSource.createHabito(newHabito);
+    return await _dataSource.createHabito(habito);
   }
 
   Future<List<Habito>> getAllHabitos() async {

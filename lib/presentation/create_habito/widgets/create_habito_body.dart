@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
-import 'package:habito_2/domain/entities/habito/habito.dart';
 import 'package:habito_2/presentation/create_habito/create_habito.dart';
 import 'package:habito_2/presentation/create_habito/provider/provider.dart';
 import 'package:habito_2/presentation/create_habito/widgets/affirmation_dropdown.dart';

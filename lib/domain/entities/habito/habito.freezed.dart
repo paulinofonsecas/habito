@@ -20,7 +20,8 @@ Habito _$HabitoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Habito {
-  String get id => throw _privateConstructorUsedError;
+  String get uuid => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get nome => throw _privateConstructorUsedError;
   @JsonKey(toJson: _$AffirmationToJson)
   Affirmation get affirmation => throw _privateConstructorUsedError;
@@ -57,7 +58,8 @@ abstract class $HabitoCopyWith<$Res> {
       _$HabitoCopyWithImpl<$Res, Habito>;
   @useResult
   $Res call(
-      {String id,
+      {String uuid,
+      int? id,
       String nome,
       @JsonKey(toJson: _$AffirmationToJson) Affirmation affirmation,
       @JsonKey(name: 'regularity_days') List<String> regularityDays,
@@ -92,7 +94,8 @@ class _$HabitoCopyWithImpl<$Res, $Val extends Habito>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? uuid = null,
+    Object? id = freezed,
     Object? nome = null,
     Object? affirmation = null,
     Object? regularityDays = null,
@@ -106,10 +109,14 @@ class _$HabitoCopyWithImpl<$Res, $Val extends Habito>
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       nome: null == nome
           ? _value.nome
           : nome // ignore: cast_nullable_to_non_nullable
@@ -176,7 +183,8 @@ abstract class _$$HabitoImplCopyWith<$Res> implements $HabitoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {String uuid,
+      int? id,
       String nome,
       @JsonKey(toJson: _$AffirmationToJson) Affirmation affirmation,
       @JsonKey(name: 'regularity_days') List<String> regularityDays,
@@ -210,7 +218,8 @@ class __$$HabitoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? uuid = null,
+    Object? id = freezed,
     Object? nome = null,
     Object? affirmation = null,
     Object? regularityDays = null,
@@ -224,10 +233,14 @@ class __$$HabitoImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_$HabitoImpl(
-      id: null == id
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       nome: null == nome
           ? _value.nome
           : nome // ignore: cast_nullable_to_non_nullable
@@ -280,7 +293,8 @@ class __$$HabitoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$HabitoImpl implements _Habito {
   _$HabitoImpl(
-      {required this.id,
+      {required this.uuid,
+      this.id,
       required this.nome,
       @JsonKey(toJson: _$AffirmationToJson) required this.affirmation,
       @JsonKey(name: 'regularity_days')
@@ -294,7 +308,7 @@ class _$HabitoImpl implements _Habito {
           toJson: _colorHexToJson)
       this.colorHex,
       @JsonKey(name: 'completed_dates')
-      final List<DateTime> completedDates = const [],
+      final List<DateTime> completedDates = const <DateTime>[],
       @JsonKey(name: 'last_completed_at') this.lastCompletedAt,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt})
@@ -306,7 +320,9 @@ class _$HabitoImpl implements _Habito {
       _$$HabitoImplFromJson(json);
 
   @override
-  final String id;
+  final String uuid;
+  @override
+  final int? id;
   @override
   final String nome;
   @override
@@ -360,7 +376,7 @@ class _$HabitoImpl implements _Habito {
 
   @override
   String toString() {
-    return 'Habito(id: $id, nome: $nome, affirmation: $affirmation, regularityDays: $regularityDays, dailyRecurrence: $dailyRecurrence, reminders: $reminders, iconCode: $iconCode, colorHex: $colorHex, completedDates: $completedDates, lastCompletedAt: $lastCompletedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Habito(uuid: $uuid, id: $id, nome: $nome, affirmation: $affirmation, regularityDays: $regularityDays, dailyRecurrence: $dailyRecurrence, reminders: $reminders, iconCode: $iconCode, colorHex: $colorHex, completedDates: $completedDates, lastCompletedAt: $lastCompletedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -368,6 +384,7 @@ class _$HabitoImpl implements _Habito {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HabitoImpl &&
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nome, nome) || other.nome == nome) &&
             (identical(other.affirmation, affirmation) ||
@@ -396,6 +413,7 @@ class _$HabitoImpl implements _Habito {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      uuid,
       id,
       nome,
       affirmation,
@@ -427,7 +445,8 @@ class _$HabitoImpl implements _Habito {
 
 abstract class _Habito implements Habito {
   factory _Habito(
-      {required final String id,
+      {required final String uuid,
+      final int? id,
       required final String nome,
       @JsonKey(toJson: _$AffirmationToJson)
       required final Affirmation affirmation,
@@ -448,7 +467,9 @@ abstract class _Habito implements Habito {
   factory _Habito.fromJson(Map<String, dynamic> json) = _$HabitoImpl.fromJson;
 
   @override
-  String get id;
+  String get uuid;
+  @override
+  int? get id;
   @override
   String get nome;
   @override

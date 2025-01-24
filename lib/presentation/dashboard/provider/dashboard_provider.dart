@@ -40,12 +40,12 @@ class DashboardNotifier with ChangeNotifier {
   }
 
   concluirHabito(Habito habito) async {
-    await marcarHabitoConcluidoUseCase.executar(habitoId: habito.id);
+    await marcarHabitoConcluidoUseCase.executar(habitoId: habito.uuid);
     return listarHabitos();
   }
 
   desconcluirHabito(Habito habito) async {
-    await desmarcarHabitoConcluidoUseCase.executar(habitoId: habito.id);
+    await desmarcarHabitoConcluidoUseCase.executar(habitoId: habito.uuid);
     return listarHabitos();
   }
 }

@@ -7,7 +7,8 @@ part of 'habito.dart';
 // **************************************************************************
 
 _$HabitoImpl _$$HabitoImplFromJson(Map<String, dynamic> json) => _$HabitoImpl(
-      id: json['id'] as String,
+      uuid: json['uuid'] as String,
+      id: (json['id'] as num?)?.toInt(),
       nome: json['nome'] as String,
       affirmation:
           Affirmation.fromJson(json['affirmation'] as Map<String, dynamic>),
@@ -25,7 +26,7 @@ _$HabitoImpl _$$HabitoImplFromJson(Map<String, dynamic> json) => _$HabitoImpl(
       completedDates: (json['completed_dates'] as List<dynamic>?)
               ?.map((e) => DateTime.parse(e as String))
               .toList() ??
-          const [],
+          const <DateTime>[],
       lastCompletedAt: json['last_completed_at'] == null
           ? null
           : DateTime.parse(json['last_completed_at'] as String),
@@ -39,6 +40,7 @@ _$HabitoImpl _$$HabitoImplFromJson(Map<String, dynamic> json) => _$HabitoImpl(
 
 Map<String, dynamic> _$$HabitoImplToJson(_$HabitoImpl instance) =>
     <String, dynamic>{
+      'uuid': instance.uuid,
       'id': instance.id,
       'nome': instance.nome,
       'affirmation': _$AffirmationToJson(instance.affirmation),
