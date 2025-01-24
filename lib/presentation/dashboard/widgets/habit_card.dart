@@ -20,11 +20,6 @@ class HabitCard extends StatefulWidget {
 class _HabitCardState extends State<HabitCard> {
   @override
   Widget build(BuildContext context) {
-    final bool isConcluidoHoje = widget.habito.completedDates.any((date) =>
-        date.year == DateTime.now().year &&
-        date.month == DateTime.now().month &&
-        date.day == DateTime.now().day);
-
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       elevation: 0, // Flat style
@@ -33,13 +28,12 @@ class _HabitCardState extends State<HabitCard> {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            CustomRadiuButton(
-              value: isConcluidoHoje,
-              onChanged: widget.onConcluidoChanged,
-              activeColor:
-                  Theme.of(context).primaryColor, // Customize active color
-              checkColor: Colors.white, // Customize check color
-            ),
+            if (widget.habito.iconCode != null)
+              Icon(
+                IconData(widget.habito.iconCode!, fontFamily: 'MaterialIcons'),
+                color: Theme.of(context).primaryColor,
+                size: 32.0,
+              ),
             const SizedBox(width: 12.0),
             Expanded(
               child: Column(
@@ -55,12 +49,12 @@ class _HabitCardState extends State<HabitCard> {
                 ],
               ),
             ),
-            IconButton(
-              icon: const Icon(Icons.more_vert),
-              onPressed: () {
-                // TODO: Show more options (edit, delete, details)
-                print('More options for habit ${widget.habito.nome}');
-              },
+            CustomRadiuButton(
+              value: widget.habito.isCompletedToday,
+              onChanged: widget.onConcluidoChanged,
+              activeColor:
+                  Theme.of(context).primaryColor, // Customize active color
+              checkColor: Colors.white, // Customize check color
             ),
           ],
         ),
