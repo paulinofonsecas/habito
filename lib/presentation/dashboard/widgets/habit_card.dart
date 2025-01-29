@@ -48,8 +48,11 @@ class _HabitCardState extends State<HabitCard> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Icon(
-                        IconData(widget.habito.iconCode!,
-                            fontFamily: 'MaterialIcons'),
+                        IconData(
+                          widget.habito.iconCode!,
+                          fontFamily: 'FontAwesomeSolid',
+                          fontPackage: 'font_awesome_flutter',
+                        ),
                         color: Color(widget.habito.colorHex!),
                         size: 32.0,
                       ),
