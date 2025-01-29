@@ -1,11 +1,11 @@
 {
-    "name": "habito_2",
-    "short_name": "habito_2",
+    "name": "A Forja de Hábitos",
+    "short_name": "Hábitos",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#3D8FE8",
+    "theme_color": "#3D8FE8",
+    "description": "Um lugar onde podes acompanhar os seus Hábitos.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
