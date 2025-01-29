@@ -35,15 +35,45 @@ class Habito with _$Habito {
 }
 
 extension HabitoX on Habito {
-  bool get isCompletedToday => completedDates.any((date) =>
-      date.year == DateTime.now().year &&
-      date.month == DateTime.now().month &&
-      date.day == DateTime.now().day);
+  bool get isCompletedToday {
+    if (dailyRecurrence == 1) {
+      return completedDates.any((date) =>
+          date.year == DateTime.now().year &&
+          date.month == DateTime.now().month &&
+          date.day == DateTime.now().day);
+    } else {
+      return frequency == dailyRecurrence;
+    }
+  }
 
-  bool isCompletedToday2(DateTime comparedDate) => completedDates.any((date) =>
-      date.year == comparedDate.year &&
-      date.month == comparedDate.month &&
-      date.day == comparedDate.day);
+  int isCompletedToday2(DateTime comparedDate) => completedDates
+      .where((date) =>
+          date.year == comparedDate.year &&
+          date.month == comparedDate.month &&
+          date.day == comparedDate.day)
+      .length;
+
+  // retorna a quantidade de frequencia de conclusão no dia
+  int get frequency {
+    if (completedDates.isEmpty) return 0;
+    final today = DateTime.now();
+    int frequency = 0;
+    for (final completedDate in completedDates) {
+      if (completedDate.year == today.year &&
+          completedDate.month == today.month &&
+          completedDate.day == today.day) {
+        frequency++;
+      }
+    }
+    return frequency;
+  }
+
+  int frequency2(DateTime comparedDate) => completedDates
+      .where((date) =>
+          date.year == comparedDate.year &&
+          date.month == comparedDate.month &&
+          date.day == comparedDate.day)
+      .length;
 
   int get currentStreak {
     if (completedDates.isEmpty) return 0;

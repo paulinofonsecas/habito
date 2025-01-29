@@ -140,12 +140,12 @@ class MarcarHabitoConcluidoUseCase {
     List<DateTime> historicoAtualizado = List.from(habito.completedDates);
 
     // Verificar se já não foi concluído na data (para evitar duplicações)
-    if (!historicoAtualizado.any((date) =>
-        date.year == data.year &&
-        date.month == data.month &&
-        date.day == data.day)) {
-      historicoAtualizado.add(data);
-    }
+    // if (!historicoAtualizado.any((date) =>
+    //     date.year == data.year &&
+    //     date.month == data.month &&
+    //     date.day == data.day)) {
+    // }
+    historicoAtualizado.add(data);
 
     final novoHabito = habito.copyWith(
       completedDates: historicoAtualizado,

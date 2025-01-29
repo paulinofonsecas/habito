@@ -85,10 +85,18 @@ class DashboardBodyState extends State<DashboardBody> {
                               habito,
                             ),
                             habito: habito,
+                            focusDate: dashboardNotifier.focusedDate,
                             isCompleted: habito.isCompletedToday2(
-                              dashboardNotifier.focusedDate,
-                            ),
+                                  dashboardNotifier.focusedDate,
+                                ) >
+                                0,
                             onConcluidoChanged: (value) {
+                              // // caso a data seja diferente, significa que o usuário quer marcar/desmarcar o hábito para outra data
+                              // if (dashboardNotifier.focusedDate !=
+                              //     DateTime.now()) {
+                              //   return;
+                              // }
+
                               _toggleHabitoConcluido(habito, value);
                             },
                           );
@@ -108,7 +116,13 @@ class DashboardBodyState extends State<DashboardBody> {
       return;
     }
 
-    if (concluido == true) {
+    if (dashboardNotifier.focusedDate.year != DateTime.now().year ||
+        dashboardNotifier.focusedDate.month != DateTime.now().month ||
+        dashboardNotifier.focusedDate.day != DateTime.now().day) {
+      return;
+    }
+
+    if (!habito.isCompletedToday) {
       dashboardNotifier.concluirHabito(habito, dashboardNotifier.focusedDate);
     } else {
       dashboardNotifier.desconcluirHabito(

@@ -10,8 +10,10 @@ class HabitCard extends StatefulWidget {
     this.onConcluidoChanged,
     this.isCompleted,
     required this.onTap,
+    this.focusDate,
   });
 
+  final DateTime? focusDate;
   final bool? isCompleted;
   final Habito habito;
   final VoidCallback onTap;
@@ -80,6 +82,7 @@ class _HabitCardState extends State<HabitCard> {
                   ),
                   CustomHabitStatus(
                     habito: widget.habito,
+                    focusDate: widget.focusDate,
                     value: widget.isCompleted ?? widget.habito.isCompletedToday,
                     onChanged: widget.onConcluidoChanged,
                     activeColor: Color(widget.habito.colorHex!),
